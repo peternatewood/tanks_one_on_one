@@ -52,6 +52,10 @@ public class Joystick {
     return joyY;
   }
 
+  public int joyIndex() {
+    return joyIndex;
+  }
+
   public int _buttonX() {
     return buttonX;
   }
@@ -94,12 +98,10 @@ public class Joystick {
     }
   }
 
-  public void handleActionMove(float xPos, float yPos, int index) {
-    if (index == joyIndex) {
-      // Calculate acceleration in x and y directions based on position relative to initial touch position
-      xAcc = clamp(xPos - xTouch, -JOY_MAX, JOY_MAX);
-      yAcc = clamp(yPos - yTouch, -JOY_MAX, JOY_MAX);
-    }
+  public void handleActionMove(float xPos, float yPos) {
+    // Calculate acceleration in x and y directions based on position relative to initial touch position
+    xAcc = clamp(xPos - xTouch, -JOY_MAX, JOY_MAX);
+    yAcc = clamp(yPos - yTouch, -JOY_MAX, JOY_MAX);
   }
 
   public void handleActionUp(float xPos, float yPos, int index) {
