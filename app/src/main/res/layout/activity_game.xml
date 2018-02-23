@@ -1,0 +1,37 @@
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="#CAA"
+  tools:context="com.peternatewood.tanksone_on_one.GameActivity"
+>
+
+  <SurfaceView
+    android:id="@+id/game_surface"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+  />
+
+  <LinearLayout
+    android:id="@+id/game_controls"
+    style="?metaButtonBarStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|center_horizontal"
+    android:background="@color/black_overlay"
+    android:orientation="horizontal"
+    tools:ignore="UselessParent"
+  >
+    <Button
+      android:id="@+id/game_button"
+      style="?metaButtonBarButtonStyle"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:text="Button!"
+      android:textSize="24sp"
+    />
+  </LinearLayout>
+
+</FrameLayout>
