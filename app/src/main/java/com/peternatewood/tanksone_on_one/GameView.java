@@ -104,8 +104,8 @@ public class GameView extends SurfaceView implements Runnable {
   }
 
   private void update() {
-    tank1.update();
-    tank2.update();
+    tank1.update(LEVELS[0], tank2);
+    tank2.update(LEVELS[0], tank1);
   }
 
   private void draw() {
