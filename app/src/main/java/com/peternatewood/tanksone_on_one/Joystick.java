@@ -1,11 +1,11 @@
 package com.peternatewood.tanksone_on_one;
 
 import android.graphics.Rect;
-
 import android.util.Log;
 
 public class Joystick {
   private final int JOY_DIRECTION_MOD;
+  private final float DEADZONE = (float) 0.25;
   private final float JOY_MAX = 32.f;
   private final float buttonSize = 64.f;
 
@@ -77,15 +77,24 @@ public class Joystick {
   }
 
   public float _xAcc() {
-    return JOY_DIRECTION_MOD * xAcc / JOY_MAX;
+    float acc = JOY_DIRECTION_MOD * xAcc / JOY_MAX;
+    if (acc > -DEADZONE && acc < DEADZONE) {
+      return 0;
+    }
+
+    return acc;
   }
 
   public float _yAcc() {
-    return JOY_DIRECTION_MOD * yAcc / -JOY_MAX; // Invert sign so tank moves forward
+    float acc = JOY_DIRECTION_MOD * yAcc / -JOY_MAX; // Invert sign so tank moves forward
+    if (acc > -DEADZONE && acc < DEADZONE) {
+      return 0;
+    }
+
+    return acc;
   }
 
   public void handleActionDown(float xPos, float yPos, int index) {
-    Log.i("Action Down", Integer.toString(index));
     if (isOnButton(xPos, yPos)) {
       button = true;
       buttonIndex = index;
@@ -100,8 +109,8 @@ public class Joystick {
 
   public void handleActionMove(float xPos, float yPos) {
     // Calculate acceleration in x and y directions based on position relative to initial touch position
-    xAcc = clamp(xPos - xTouch, -JOY_MAX, JOY_MAX);
-    yAcc = clamp(yPos - yTouch, -JOY_MAX, JOY_MAX);
+    xAcc = GameView.clamp(xPos - xTouch, -JOY_MAX, JOY_MAX);
+    yAcc = GameView.clamp(yPos - yTouch, -JOY_MAX, JOY_MAX);
   }
 
   public void handleActionUp(float xPos, float yPos, int index) {
@@ -128,7 +137,7 @@ public class Joystick {
     return xPos >= x && xPos <= x + w && yPos >= y && yPos <= y + h;
   }
 
-  private float clamp(float val, float min, float max) {
-    return val < min ? min : (val > max ? max : val);
-  }
+  // private float clamp(float val, float min, float max) {
+  //   return val < min ? min : (val > max ? max : val);
+  // }
 }
