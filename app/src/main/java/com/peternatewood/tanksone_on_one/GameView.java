@@ -282,7 +282,6 @@ public class GameView extends SurfaceView implements Runnable {
         break;
       case MotionEvent.ACTION_MOVE:
         // User swipes
-        // Log.i("Move Index", Integer.toString(index));
         index = joy1.joyIndex();
         if (index != -1) {
           joy1.handleActionMove(event.getX(index), event.getY(index));

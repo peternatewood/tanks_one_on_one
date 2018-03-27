@@ -16,11 +16,6 @@ public class Shell {
 
     x = tank._x();
     y = tank._y();
-    // float cos = (float) Math.cos(r);
-    // float sin = (float) Math.sin(r);
-
-    // xVel = SPEED * cos;
-    // yVel = SPEED * sin;
   }
 
   public float _x() {
@@ -80,10 +75,5 @@ public class Shell {
 
     x = tank._x() + Tank.SIZE * xVel;
     y = tank._y() + Tank.SIZE * yVel;
-    // float cos = (float) Math.cos(r);
-    // float sin = (float) Math.sin(r);
-
-    // xVel = SPEED * cos;
-    // yVel = SPEED * sin;
   }
 }

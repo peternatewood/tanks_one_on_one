@@ -136,8 +136,4 @@ public class Joystick {
   private boolean isInBounds(float xPos, float yPos) {
     return xPos >= x && xPos <= x + w && yPos >= y && yPos <= y + h;
   }
-
-  // private float clamp(float val, float min, float max) {
-  //   return val < min ? min : (val > max ? max : val);
-  // }
 }
