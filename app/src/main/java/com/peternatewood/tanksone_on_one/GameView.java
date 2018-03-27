@@ -16,6 +16,8 @@ import android.util.Log;
 public class GameView extends SurfaceView implements Runnable {
   volatile boolean isRunning = false;
 
+  static double TAU = 2 * Math.PI;
+
   private final int w, h;
   private final float scale;
   private final int[] PALETTE = {
@@ -205,6 +207,31 @@ public class GameView extends SurfaceView implements Runnable {
         x2 = scale * turret[(2 * i + 2) % (2 * pointsCount)];
         y2 = TILES_Y + scale * turret[(2 * i + 3) % (2 * pointsCount)];
         canvas.drawLine(x1, y1, x2, y2, paint);
+      }
+    }
+    else if (tank._life() > 90) {
+      paint.setColor(Color.WHITE);
+
+      // Draw an empty circle
+      float radius = 1.5f * (120 - tank._life());
+      double sides = TAU * radius / 2;
+
+      double angleDelta = TAU / sides;
+      double angle = angleDelta;
+
+      float startX, startY;
+      float endX = tank._x() + radius;
+      float endY = tank._y() + 0.0f;
+
+      for (int i = 0; i < sides; i++) {
+        startX = endX;
+        startY = endY;
+        endX = tank._x() + (float) (radius * Math.cos(angle));
+        endY = tank._y() + (float) (radius * Math.sin(angle));
+        angle += angleDelta;
+
+        // SDL_RenderDrawLine(r, startX, startY, endX, endY);
+        canvas.drawLine(scale * startX, TILES_Y + scale * startY, scale * endX, TILES_Y + scale * endY, paint);
       }
     }
   }
