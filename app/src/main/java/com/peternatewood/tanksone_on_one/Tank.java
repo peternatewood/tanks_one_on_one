@@ -41,7 +41,7 @@ public class Tank {
      18,  3
   };
 
-  private boolean fire;
+  private boolean fire, destroyedSelf;
   private float x, y, r, startX, startY, startR;
   private int minX, maxX, minY, maxY, fireTimer, life;
   private float xAcc, yAcc;
@@ -60,6 +60,7 @@ public class Tank {
     startR = radians;
     fireTimer = 0;
     life = MAX_LIFE;
+    destroyedSelf = false;
 
     xAcc = 0.f;
     yAcc = 0.f;
@@ -113,6 +114,10 @@ public class Tank {
     return life;
   }
 
+  public boolean _destroyedSelf() {
+    return destroyedSelf;
+  }
+
   public boolean isAlive() {
     return life == MAX_LIFE;
   }
@@ -128,6 +133,7 @@ public class Tank {
     r = startR;
     fireTimer = 0;
     life = MAX_LIFE;
+    destroyedSelf = false;
 
     xAcc = 0.f;
     yAcc = 0.f;
@@ -202,18 +208,19 @@ public class Tank {
         sX = shells[i]._x() - other._x();
         sY = shells[i]._y() - other._y();
 
-        if (sX * sX + sY * sY < SIZE * SIZE) {
+        if (other.isAlive() && sX * sX + sY * sY < SIZE * SIZE) {
           // Shell hit other tank
           other.destroy();
           shells[i].destroy();
         }
-        else {
+        else if (isAlive()) {
           sX = shells[i]._x() - x;
           sY = shells[i]._y() - y;
           if (sX * sX + sY * sY < SIZE * SIZE) {
             // Shell hit tank
             destroy();
             shells[i].destroy();
+            destroyedSelf = true;
           }
         }
       }
