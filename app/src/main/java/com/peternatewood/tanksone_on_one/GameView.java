@@ -184,6 +184,14 @@ public class GameView extends SurfaceView implements Runnable {
       drawJoystick(joy1);
       drawJoystick(joy2);
 
+      // Draw UI elements
+      paint.setColor(Color.WHITE);
+      paint.setStyle(Style.FILL);
+      canvas.drawText("Player 1:", scale * TILE_SIZE * 20.5f, TILES_Y + scale * TILE_SIZE, paint);
+      canvas.drawText(stringScores[0], scale * TILE_SIZE * 21, TILES_Y + scale * 2 * TILE_SIZE, paint);
+      canvas.drawText("Player 2:", scale * TILE_SIZE * 20.5f, TILES_Y + scale * 5 * TILE_SIZE, paint);
+      canvas.drawText(stringScores[1], scale * TILE_SIZE * 21, TILES_Y + scale * 6 * TILE_SIZE, paint);
+
       // Unlock canvas?
       surfaceHolder.unlockCanvasAndPost(canvas);
     }
