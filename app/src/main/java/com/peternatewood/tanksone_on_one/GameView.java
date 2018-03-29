@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -67,6 +68,8 @@ public class GameView extends SurfaceView implements Runnable {
   };
   // Thread for our game loop
   private Thread gameThread = null;
+  private int[] scores = { 0, 0 };
+  private String[] stringScores = { "0", "0" };
   private Tank tank1, tank2;
   private Joystick joy1, joy2;
   private Paint paint;
@@ -94,6 +97,8 @@ public class GameView extends SurfaceView implements Runnable {
     surfaceHolder = getHolder();
     paint = new Paint();
     paint.setStrokeWidth(2);
+    paint.setTextSize(32);
+    paint.setTypeface(Typeface.MONOSPACE);
   }
 
   @Override
@@ -106,8 +111,20 @@ public class GameView extends SurfaceView implements Runnable {
   }
 
   private void update() {
+    boolean tank1Alive = tank1.isAlive();
+    boolean tank2Alive = tank2.isAlive();
+
     tank1.update(LEVELS[0], tank2);
     tank2.update(LEVELS[0], tank1);
+
+    if (tank1Alive && !tank1.isAlive() && !tank1._destroyedSelf()) {
+      scores[0]++;
+      stringScores[0] = String.valueOf(scores[0]);
+    }
+    if (tank2Alive && !tank2.isAlive() && !tank2._destroyedSelf()) {
+      scores[1]++;
+      stringScores[1] = String.valueOf(scores[1]);
+    }
 
     if (tank1._life() == 0 || tank2._life() == 0) {
       // Reset
@@ -213,26 +230,29 @@ public class GameView extends SurfaceView implements Runnable {
       paint.setColor(Color.WHITE);
 
       // Draw an empty circle
-      float radius = 1.5f * (120 - tank._life());
-      double sides = TAU * radius / 2;
+      drawCircle(tank._x(), tank._y(), 120 - tank._life());
+    }
+  }
 
-      double angleDelta = TAU / sides;
-      double angle = angleDelta;
+  private void drawCircle(float x, float y, float radius) {
+    double sides = TAU * radius / 2;
 
-      float startX, startY;
-      float endX = tank._x() + radius;
-      float endY = tank._y() + 0.0f;
+    double angleDelta = TAU / sides;
+    double angle = angleDelta;
 
-      for (int i = 0; i < sides; i++) {
-        startX = endX;
-        startY = endY;
-        endX = tank._x() + (float) (radius * Math.cos(angle));
-        endY = tank._y() + (float) (radius * Math.sin(angle));
-        angle += angleDelta;
+    float startX, startY;
+    float endX = x + radius;
+    float endY = y + 0.0f;
 
-        // SDL_RenderDrawLine(r, startX, startY, endX, endY);
-        canvas.drawLine(scale * startX, TILES_Y + scale * startY, scale * endX, TILES_Y + scale * endY, paint);
-      }
+    for (int i = 0; i < sides; i++) {
+      startX = endX;
+      startY = endY;
+      endX = x + (float) (radius * Math.cos(angle));
+      endY = y + (float) (radius * Math.sin(angle));
+      angle += angleDelta;
+
+      // SDL_RenderDrawLine(r, startX, startY, endX, endY);
+      canvas.drawLine(scale * startX, TILES_Y + scale * startY, scale * endX, TILES_Y + scale * endY, paint);
     }
   }
 
