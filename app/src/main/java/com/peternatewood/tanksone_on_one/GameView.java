@@ -70,8 +70,10 @@ public class GameView extends SurfaceView implements Runnable {
   private Thread gameThread = null;
   private int[] scores = { 0, 0 };
   private String[] stringScores = { "0", "0" };
+  private String[] controls = { "pad", "pad" };
   private Tank tank1, tank2;
   private Joystick joy1, joy2;
+  private DPad pad1, pad2;
   private Paint paint;
   private Point center;
   private Canvas canvas;
@@ -93,6 +95,9 @@ public class GameView extends SurfaceView implements Runnable {
 
     joy1 = new Joystick(w, h, false);
     joy2 = new Joystick(w, h, true);
+
+    pad1 = new DPad(w, h, false);
+    pad2 = new DPad(w, h, true);
 
     surfaceHolder = getHolder();
     paint = new Paint();
@@ -181,8 +186,14 @@ public class GameView extends SurfaceView implements Runnable {
         }
       }
 
-      drawJoystick(joy1);
-      drawJoystick(joy2);
+      switch (controls[0]) {
+        case "pad": drawDPad(pad1); break;
+        case "joy": drawJoystick(joy1); break;
+      }
+      switch (controls[1]) {
+        case "pad": drawDPad(pad2); break;
+        case "joy": drawJoystick(joy2); break;
+      }
 
       // Draw UI elements
       paint.setColor(Color.WHITE);
@@ -292,6 +303,55 @@ public class GameView extends SurfaceView implements Runnable {
     canvas.drawCircle(buttonX, buttonY, buttonSize, paint);
   }
 
+  private void drawDPad(DPad pad) {
+    // Draw controls background
+    paint.setColor(Color.GRAY);
+    canvas.drawRect(pad._rect(), paint);
+
+    float buttonSize = pad._buttonSize();
+    float buttonX = pad._buttonX();
+    float buttonY = pad._buttonY();
+
+    // Circle behind button
+    paint.setColor(Color.BLACK);
+    canvas.drawCircle(buttonX, buttonY, buttonSize + 8.f, paint);
+    // Rectangles behind arrows
+
+    // Draw Button
+    paint.setColor(Color.RED);
+    if (pad._button()) {
+      buttonSize -= 8.f;
+    }
+    canvas.drawCircle(buttonX, buttonY, buttonSize, paint);
+
+    // Draw arrow buttons
+    paint.setColor(pad._yAcc() > 0 ? Color.GREEN : Color.YELLOW);
+    canvas.drawRect(pad._arrowUp(), paint);
+    paint.setColor(pad._yAcc() < 0 ? Color.GREEN : Color.YELLOW);
+    canvas.drawRect(pad._arrowDown(), paint);
+    paint.setColor(pad._xAcc() < 0 ? Color.GREEN : Color.YELLOW);
+    canvas.drawRect(pad._arrowLeft(), paint);
+    paint.setColor(pad._xAcc() > 0 ? Color.GREEN : Color.YELLOW);
+    canvas.drawRect(pad._arrowRight(), paint);
+
+    // Draw arrows on buttons
+    paint.setColor(Color.BLACK);
+    paint.setStyle(Style.FILL);
+    drawPolygon(pad.arrowUpPoints(), 4);
+    drawPolygon(pad.arrowDownPoints(), 4);
+    drawPolygon(pad.arrowLeftPoints(), 4);
+    drawPolygon(pad.arrowRightPoints(), 4);
+  }
+
+  private void drawPolygon(float[] points, int length) {
+    Path polyPath = new Path();
+    polyPath.moveTo(points[0], points[1]);
+    for (int i = 0; i < length; i++) {
+      polyPath.lineTo(points[2 * i], points[2 * i + 1]);
+    }
+    canvas.drawPath(polyPath, paint);
+  }
+
   private void limitFramerate() {
     final long FRAME_DELAY = 1000 / 60;
 
@@ -313,68 +373,167 @@ public class GameView extends SurfaceView implements Runnable {
     switch (event.getAction() & MotionEvent.ACTION_MASK) {
       case MotionEvent.ACTION_DOWN:
         // First touch event
-        joy1.handleActionDown(x, y, index);
-        if (joy1._button() != buttonState[0]) {
-          tank1.toggleFire(joy1._button());
+        switch (controls[0]) {
+          case "joy":
+            joy1.handleActionDown(x, y, index);
+            if (joy1._button() != buttonState[0]) {
+              tank1.toggleFire(joy1._button());
+            }
+            break;
+          case "pad":
+            pad1.handleActionDown(x, y, index);
+            if (pad1._button() != buttonState[0]) {
+              tank1.toggleFire(pad1._button());
+            }
+            tank1.setAcc(pad1._xAcc(), pad1._yAcc());
+            break;
         }
 
-        joy2.handleActionDown(x, y, index);
-        if (joy2._button() != buttonState[1]) {
-          tank2.toggleFire(joy2._button());
-        }
+        switch (controls[1]) {
+          case "joy":
+            joy2.handleActionDown(x, y, index);
+            if (joy2._button() != buttonState[1]) {
+              tank2.toggleFire(joy2._button());
+            }
+            break;
+          case "pad":
+            pad2.handleActionDown(x, y, index);
+            if (pad2._button() != buttonState[1]) {
+              tank2.toggleFire(pad2._button());
+            }
+            tank2.setAcc(pad2._xAcc(), pad2._yAcc());
+            break;
+          }
         break;
       case MotionEvent.ACTION_POINTER_DOWN:
         // Subsequent touch events
-        joy1.handleActionDown(x, y, index);
-        if (joy1._button() != buttonState[0]) {
-          tank1.toggleFire(joy1._button());
+        switch (controls[0]) {
+          case "joy":
+            joy1.handleActionDown(x, y, index);
+            if (joy1._button() != buttonState[0]) {
+              tank1.toggleFire(joy1._button());
+            }
+            break;
+          case "pad":
+            pad1.handleActionDown(x, y, index);
+            if (pad1._button() != buttonState[0]) {
+              tank1.toggleFire(pad1._button());
+            }
+            tank1.setAcc(pad1._xAcc(), pad1._yAcc());
+            break;
         }
-
-        joy2.handleActionDown(x, y, index);
-        if (joy2._button() != buttonState[1]) {
-          tank2.toggleFire(joy2._button());
+        switch (controls[1]) {
+          case "joy":
+            joy2.handleActionDown(x, y, index);
+            if (joy2._button() != buttonState[1]) {
+              tank2.toggleFire(joy2._button());
+            }
+            break;
+          case "pad":
+            pad2.handleActionDown(x, y, index);
+            if (pad2._button() != buttonState[1]) {
+              tank2.toggleFire(pad2._button());
+            }
+            tank2.setAcc(pad2._xAcc(), pad2._yAcc());
+            break;
         }
         break;
       case MotionEvent.ACTION_MOVE:
         // User swipes
-        index = joy1.joyIndex();
-        if (index != -1) {
-          joy1.handleActionMove(event.getX(index), event.getY(index));
-          tank1.setAcc(joy1._xAcc(), joy1._yAcc());
+        switch (controls[0]) {
+          case "joy":
+            index = joy1.joyIndex();
+            if (index != -1) {
+              joy1.handleActionMove(event.getX(index), event.getY(index));
+              tank1.setAcc(joy1._xAcc(), joy1._yAcc());
+            }
+            break;
+          case "pad":
+            break;
         }
 
-        index = joy2.joyIndex();
-        if (index != -1) {
-          joy2.handleActionMove(event.getX(index), event.getY(index));
-          tank2.setAcc(joy2._xAcc(), joy2._yAcc());
+        switch (controls[1]) {
+          case "joy":
+            index = joy2.joyIndex();
+            if (index != -1) {
+              joy2.handleActionMove(event.getX(index), event.getY(index));
+              tank2.setAcc(joy2._xAcc(), joy2._yAcc());
+            }
+            break;
+          case "pad":
+            break;
         }
         break;
       case MotionEvent.ACTION_POINTER_UP:
         // Every touch release except the last one
-        joy1.handleActionUp(x, y, index);
-        tank1.setAcc(joy1._xAcc(), joy1._yAcc());
-        if (joy1._button() != buttonState[0]) {
-          tank1.toggleFire(joy1._button());
+        switch (controls[0]) {
+          case "joy":
+            joy1.handleActionUp(x, y, index);
+            tank1.setAcc(joy1._xAcc(), joy1._yAcc());
+            if (joy1._button() != buttonState[0]) {
+              tank1.toggleFire(joy1._button());
+            }
+            break;
+          case "pad":
+            pad1.handleActionUp(x, y, index);
+            tank1.setAcc(pad1._xAcc(), pad1._yAcc());
+            if (pad1._button() != buttonState[0]) {
+              tank1.toggleFire(pad1._button());
+            }
+            break;
         }
 
-        joy2.handleActionUp(x, y, index);
-        tank2.setAcc(joy1._xAcc(), joy1._yAcc());
-        if (joy2._button() != buttonState[1]) {
-          tank2.toggleFire(joy2._button());
+        switch (controls[1]) {
+          case "joy":
+            joy2.handleActionUp(x, y, index);
+            tank2.setAcc(joy2._xAcc(), joy2._yAcc());
+            if (joy2._button() != buttonState[1]) {
+              tank2.toggleFire(joy2._button());
+            }
+            break;
+          case "pad":
+            pad2.handleActionUp(x, y, index);
+            tank2.setAcc(pad2._xAcc(), pad2._yAcc());
+            if (pad2._button() != buttonState[1]) {
+              tank2.toggleFire(pad2._button());
+            }
+            break;
         }
         break;
       case MotionEvent.ACTION_UP:
         // Last touch to be released
-        joy1.handleActionUp(x, y, index);
-        tank1.setAcc(joy1._xAcc(), joy1._yAcc());
-        if (joy1._button() != buttonState[0]) {
-          tank1.toggleFire(joy1._button());
+        switch (controls[0]) {
+          case "joy":
+            joy1.handleActionUp(x, y, index);
+            tank1.setAcc(joy1._xAcc(), joy1._yAcc());
+            if (joy1._button() != buttonState[0]) {
+              tank1.toggleFire(joy1._button());
+            }
+            break;
+          case "pad":
+            pad1.handleActionUp(x, y, index);
+            tank1.setAcc(pad1._xAcc(), pad1._yAcc());
+            if (pad1._button() != buttonState[0]) {
+              tank1.toggleFire(pad1._button());
+            }
+            break;
         }
 
-        joy2.handleActionUp(x, y, index);
-        tank2.setAcc(joy1._xAcc(), joy1._yAcc());
-        if (joy2._button() != buttonState[1]) {
-          tank2.toggleFire(joy2._button());
+        switch (controls[1]) {
+          case "joy":
+            joy2.handleActionUp(x, y, index);
+            tank2.setAcc(joy1._xAcc(), joy1._yAcc());
+            if (joy2._button() != buttonState[1]) {
+              tank2.toggleFire(joy2._button());
+            }
+            break;
+          case "pad":
+            pad2.handleActionUp(x, y, index);
+            tank2.setAcc(pad2._xAcc(), pad2._yAcc());
+            if (pad2._button() != buttonState[1]) {
+              tank2.toggleFire(pad2._button());
+            }
+            break;
         }
         break;
     }
