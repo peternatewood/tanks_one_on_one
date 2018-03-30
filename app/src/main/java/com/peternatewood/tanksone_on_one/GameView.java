@@ -88,7 +88,7 @@ public class GameView extends SurfaceView implements Runnable {
     scale = (float) width / (25 * TILE_SIZE);
     SCALED_TILE = scale * TILE_SIZE;
     center = new Point(w / 2, h / 2);
-    TILES_Y = center.y - (float) (SCALED_TILE * 10);
+    TILES_Y = center.y - (SCALED_TILE * 10);
 
     controls[0] = controls0;
     controls[1] = controls1;
@@ -498,7 +498,7 @@ public class GameView extends SurfaceView implements Runnable {
       if (level[i] == 3 || level[i] == 4) {
         left = TILE_SIZE * (i % 25);
         right = left + TILE_SIZE;
-        top = TILE_SIZE * ((int) i / 25);
+        top = TILE_SIZE * (i / 25);
         bottom = top + TILE_SIZE;
 
         closestX = clamp(x, left, right);

@@ -43,13 +43,13 @@ public class MenuActivity extends AppCompatActivity {
         playersReady[playerNum] = button.isChecked();
 
         if (playersReady[0] && playersReady[1]) {
-          startBattle(v);
+          startBattle();
         }
       }
     }
   }
 
-  private void startBattle(View v) {
+  private void startBattle() {
     Intent intent = new Intent(this, GameActivity.class);
     intent.putExtra("controls0", controls[0]);
     intent.putExtra("controls1", controls[1]);
