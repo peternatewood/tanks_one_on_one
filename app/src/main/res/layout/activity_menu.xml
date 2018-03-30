@@ -1,9 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="#0099cc"
+  android:background="#339900"
   tools:context="com.peternatewood.tanksone_on_one.MenuActivity"
 >
+
+  <!-- This FrameLayout insets its children based on system windows using
+       android:fitsSystemWindows. -->
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="48sp"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+  >
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+    >
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Player 1 Controls"
+        android:textSize="32sp"
+        android:textStyle="bold"
+      />
+
+      <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:checkedButton="@+id/radio_1_joy"
+      >
+        <RadioButton
+          android:id="@+id/radio_1_joy"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Joystick"
+          android:textSize="24sp"
+          android:paddingRight="16dp"
+          android:tag="0"
+          android:onClick="setJoyControls"
+        />
+
+        <RadioButton
+          android:id="@+id/radio_1_d_pad"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="D-Pad"
+          android:textSize="24sp"
+          android:tag="0"
+          android:onClick="setPadControls"
+        />
+      </RadioGroup>
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Player 2 Controls"
+        android:textSize="32sp"
+        android:textStyle="bold"
+      />
+
+      <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:checkedButton="@+id/radio_2_joy"
+      >
+        <RadioButton
+          android:id="@+id/radio_2_joy"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Joystick"
+          android:textSize="24sp"
+          android:paddingRight="16dp"
+          android:tag="1"
+          android:onClick="setJoyControls"
+        />
+
+        <RadioButton
+          android:id="@+id/radio_2_d_pad"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="D-Pad"
+          android:textSize="24sp"
+          android:tag="1"
+          android:onClick="setPadControls"
+        />
+      </RadioGroup>
+    </LinearLayout>
+  </FrameLayout>
+
+  <LinearLayout
+    android:id="@+id/menu_content_controls"
+    style="?metaButtonBarStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|center_horizontal"
+    android:background="@color/black_overlay"
+    android:orientation="horizontal"
+    tools:ignore="UselessParent"
+  >
+
+    <Button
+      android:id="@+id/battle_button"
+      style="?metaButtonBarButtonStyle"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:onClick="startBattle"
+      android:text="@string/battle_button"
+      android:textSize="24sp"
+    />
+
+  </LinearLayout>
 </FrameLayout>
