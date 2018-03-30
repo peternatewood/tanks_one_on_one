@@ -205,6 +205,15 @@ public class GameView extends SurfaceView implements Runnable {
       canvas.drawText(stringScores[0], scale * TILE_SIZE * 21, TILES_Y + scale * 2 * TILE_SIZE, paint);
       canvas.drawText("Player 2:", scale * TILE_SIZE * 20.5f, TILES_Y + scale * 5 * TILE_SIZE, paint);
       canvas.drawText(stringScores[1], scale * TILE_SIZE * 21, TILES_Y + scale * 6 * TILE_SIZE, paint);
+      // And upside down for player 1
+      // Save the current canvas to avoid rotating it too
+      canvas.save();
+      canvas.rotate(180f, w / 2, h / 2);
+      canvas.drawText("Player 1:", scale * TILE_SIZE * 0.5f, TILES_Y + scale * TILE_SIZE, paint);
+      canvas.drawText(stringScores[0], scale * TILE_SIZE, TILES_Y + scale * 2 * TILE_SIZE, paint);
+      canvas.drawText("Player 2:", scale * TILE_SIZE * 0.5f, TILES_Y + scale * 5 * TILE_SIZE, paint);
+      canvas.drawText(stringScores[1], scale * TILE_SIZE, TILES_Y + scale * 6 * TILE_SIZE, paint);
+      canvas.restore();
 
       // Unlock canvas?
       surfaceHolder.unlockCanvasAndPost(canvas);
