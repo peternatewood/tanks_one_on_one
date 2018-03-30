@@ -25,13 +25,6 @@ public class Shell {
     return y;
   }
 
-  public float _xVel() {
-    return xVel;
-  }
-  public float _yVel() {
-    return yVel;
-  }
-
   public int _life() {
     return life;
   }
