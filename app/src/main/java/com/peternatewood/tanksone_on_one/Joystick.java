@@ -16,6 +16,11 @@ public class Joystick {
   private int buttonIndex, joyIndex; // MotionEvent indexes
   private float xAcc, yAcc, xTouch, yTouch;
 
+  private float[] arrowUpPoints    = { 0,0, 0,0, 0,0 };
+  private float[] arrowDownPoints  = { 0,0, 0,0, 0,0 };
+  private float[] arrowLeftPoints  = { 0,0, 0,0, 0,0 };
+  private float[] arrowRightPoints = { 0,0, 0,0, 0,0 };
+
   public Joystick(int width, int height, boolean isOnBottom) {
     x = 0;
     w = width;
@@ -34,6 +39,22 @@ public class Joystick {
 
     button = false;
     JOY_DIRECTION_MOD = isOnBottom ? 1 : -1;
+
+    arrowUpPoints[0]    = joyX - 16; arrowUpPoints[1]    = joyY - 80;
+    arrowUpPoints[2]    = joyX;      arrowUpPoints[3]    = joyY - 96;
+    arrowUpPoints[4]    = joyX + 16; arrowUpPoints[5]    = joyY - 80;
+
+    arrowDownPoints[0]  = joyX - 16; arrowDownPoints[1]  = joyY + 80;
+    arrowDownPoints[2]  = joyX;      arrowDownPoints[3]  = joyY + 96;
+    arrowDownPoints[4]  = joyX + 16; arrowDownPoints[5]  = joyY + 80;
+
+    arrowLeftPoints[0]  = joyX - 80; arrowLeftPoints[1]  = joyY - 16;
+    arrowLeftPoints[2]  = joyX - 96; arrowLeftPoints[3]  = joyY;
+    arrowLeftPoints[4]  = joyX - 80; arrowLeftPoints[5]  = joyY + 16;
+
+    arrowRightPoints[0] = joyX + 80; arrowRightPoints[1] = joyY - 16;
+    arrowRightPoints[2] = joyX + 96; arrowRightPoints[3] = joyY;
+    arrowRightPoints[4] = joyX + 80; arrowRightPoints[5] = joyY + 16;
   }
 
   public boolean _button() {
@@ -74,6 +95,22 @@ public class Joystick {
 
   public float _yVel() {
     return yAcc;
+  }
+
+  public float[] arrowUpPoints() {
+    return arrowUpPoints;
+  }
+
+  public float[] arrowDownPoints() {
+    return arrowDownPoints;
+  }
+
+  public float[] arrowLeftPoints() {
+    return arrowLeftPoints;
+  }
+
+  public float[] arrowRightPoints() {
+    return arrowRightPoints;
   }
 
   public float _xAcc() {

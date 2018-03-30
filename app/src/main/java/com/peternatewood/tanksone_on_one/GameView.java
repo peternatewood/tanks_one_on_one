@@ -295,6 +295,12 @@ public class GameView extends SurfaceView implements Runnable {
     paint.setColor(Color.BLACK);
     canvas.drawCircle(joyX, joyY, buttonSize + 8.f, paint);
     canvas.drawCircle(buttonX, buttonY, buttonSize + 8.f, paint);
+    // Draw arrows around joystick
+    paint.setStyle(Style.FILL);
+    drawPolygon(joy.arrowUpPoints(), 3);
+    drawPolygon(joy.arrowDownPoints(), 3);
+    drawPolygon(joy.arrowLeftPoints(), 3);
+    drawPolygon(joy.arrowRightPoints(), 3);
     // Draw joystick
     paint.setColor(Color.YELLOW);
     canvas.drawCircle(xLast, yLast, buttonSize, paint);
