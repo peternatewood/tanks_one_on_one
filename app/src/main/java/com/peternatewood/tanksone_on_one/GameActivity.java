@@ -19,7 +19,11 @@ public class GameActivity extends AppCompatActivity {
     size = new Point();
     display.getSize(size);
 
-    gameView = new GameView(this, size.x, size.y);
+    Bundle extras = getIntent().getExtras();
+    String controls0 = extras.getString("controls0");
+    String controls1 = extras.getString("controls1");
+
+    gameView = new GameView(this, size.x, size.y, controls0, controls1);
     setContentView(gameView);
   }
 

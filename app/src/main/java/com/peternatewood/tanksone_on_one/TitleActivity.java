@@ -74,6 +74,6 @@ public class TitleActivity extends AppCompatActivity implements View.OnClickList
 
   @Override
   public void onClick(View v) {
-    startActivity(new Intent(this, GameActivity.class));
+    startActivity(new Intent(this, MenuActivity.class));
   }
 }

@@ -79,7 +79,7 @@ public class GameView extends SurfaceView implements Runnable {
   private Canvas canvas;
   private SurfaceHolder surfaceHolder;
 
-  public GameView(Context context, int width, int height) {
+  public GameView(Context context, int width, int height, String controls0, String controls1) {
     super(context);
 
     w = width;
@@ -89,6 +89,9 @@ public class GameView extends SurfaceView implements Runnable {
     SCALED_TILE = scale * TILE_SIZE;
     center = new Point(w / 2, h / 2);
     TILES_Y = center.y - (float) (SCALED_TILE * 10);
+
+    controls[0] = controls0;
+    controls[1] = controls1;
 
     tank1 = new Tank( 64.f,  64.f, 0.f, TILE_SIZE);
     tank2 = new Tank(576.f, 576.f, (float) Math.PI, TILE_SIZE);
