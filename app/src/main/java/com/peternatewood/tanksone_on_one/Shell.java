@@ -46,24 +46,17 @@ public class Shell {
       int collision = GameView.getCollision(x, y, xVel, yVel, 4, level);
 
       if (collision % 2 == 1) {
-        bounceX();
+        x -= xVel;
+        xVel *= -1;
       }
       if (collision >= 2) {
-        bounceY();
+        y -= yVel;
+        yVel *= -1;
       }
 
       x += xVel;
       y += yVel;
     }
-  }
-
-  public void bounceX() {
-    x -= xVel;
-    xVel *= -1;
-  }
-  public void bounceY() {
-    y -= yVel;
-    yVel *= -1;
   }
 
   public void fire(Tank tank) {
