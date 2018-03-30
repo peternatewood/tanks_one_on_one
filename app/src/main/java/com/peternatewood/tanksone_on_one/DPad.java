@@ -12,7 +12,7 @@ public class DPad {
   private Rect rect, arrowUp, arrowDown, arrowLeft, arrowRight;
   private int buttonX, buttonY;
   private int buttonIndex, upIndex, downIndex, leftIndex, rightIndex; // MotionEvent indexes
-  private float xAcc, yAcc, xTouch, yTouch;
+  private float xAcc, yAcc;
   private float[] arrowUpPoints    = { 0,0, 0,0, 0,0, 0,0 };
   private float[] arrowDownPoints  = { 0,0, 0,0, 0,0, 0,0 };
   private float[] arrowLeftPoints  = { 0,0, 0,0, 0,0, 0,0 };
