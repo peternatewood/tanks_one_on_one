@@ -21,116 +21,128 @@
       android:layout_height="match_parent"
       android:orientation="vertical"
     >
-      <ToggleButton
-        android:id="@+id/ready_1_toggle"
-        style="?metaButtonBarButtonStyle"
+      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="ToggleButton"
-        android:textOff="Not Ready"
-        android:textOn="Ready!"
-        android:textSize="24sp"
-        android:tag="0"
-        android:onClick="togglePlayerReady"
-        android:rotation="180"
-      />
-
-      <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:checkedButton="@+id/radio_1_joy"
+        android:orientation="vertical"
         android:rotation="180"
       >
-        <RadioButton
-          android:id="@+id/radio_1_joy"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Joystick"
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="2"
+          android:gravity="center"
+          android:text="Player 1 Controls"
+          android:textSize="32sp"
+          android:textStyle="bold"
+        />
+
+        <RadioGroup
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="2"
+          android:gravity="center"
+          android:orientation="horizontal"
+          android:checkedButton="@+id/radio_1_joy"
+        >
+          <RadioButton
+            android:id="@+id/radio_1_joy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Joystick"
+            android:textSize="24sp"
+            android:paddingRight="16dp"
+            android:tag="0"
+            android:onClick="setJoyControls"
+          />
+
+          <RadioButton
+            android:id="@+id/radio_1_d_pad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="D-Pad"
+            android:textSize="24sp"
+            android:tag="0"
+            android:onClick="setPadControls"
+          />
+        </RadioGroup>
+
+        <ToggleButton
+          android:id="@+id/ready_1_toggle"
+          style="?metaButtonBarButtonStyle"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:text="ToggleButton"
+          android:textOff="Not Ready"
+          android:textOn="Ready!"
           android:textSize="24sp"
-          android:paddingRight="16dp"
           android:tag="0"
-          android:onClick="setJoyControls"
+          android:onClick="togglePlayerReady"
         />
-
-        <RadioButton
-          android:id="@+id/radio_1_d_pad"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="D-Pad"
-          android:textSize="24sp"
-          android:tag="0"
-          android:onClick="setPadControls"
-        />
-      </RadioGroup>
-
-      <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:gravity="center"
-        android:text="Player 1 Controls"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:rotation="180"
-      />
-
-      <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:gravity="center"
-        android:text="Player 2 Controls"
-        android:textSize="32sp"
-        android:textStyle="bold"
-      />
-
-      <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:checkedButton="@+id/radio_2_joy"
-      >
-        <RadioButton
-          android:id="@+id/radio_2_joy"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Joystick"
-          android:textSize="24sp"
-          android:paddingRight="16dp"
-          android:tag="1"
-          android:onClick="setJoyControls"
-        />
-
-        <RadioButton
-          android:id="@+id/radio_2_d_pad"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="D-Pad"
-          android:textSize="24sp"
-          android:tag="1"
-          android:onClick="setPadControls"
-        />
-      </RadioGroup>
-
-      <ToggleButton
-        android:id="@+id/ready_2_toggle"
-        style="?metaButtonBarButtonStyle"
+      </LinearLayout>
+      <!-- TODO: Level select -->
+      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="ToggleButton"
-        android:textOff="Not Ready"
-        android:textOn="Ready!"
-        android:textSize="24sp"
-        android:tag="1"
-        android:onClick="togglePlayerReady"
-      />
+        android:orientation="vertical"
+      >
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="2"
+          android:gravity="center"
+          android:text="Player 2 Controls"
+          android:textSize="32sp"
+          android:textStyle="bold"
+        />
+
+        <RadioGroup
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="2"
+          android:gravity="center"
+          android:orientation="horizontal"
+          android:checkedButton="@+id/radio_2_joy"
+        >
+          <RadioButton
+            android:id="@+id/radio_2_joy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Joystick"
+            android:textSize="24sp"
+            android:paddingRight="16dp"
+            android:tag="1"
+            android:onClick="setJoyControls"
+          />
+
+          <RadioButton
+            android:id="@+id/radio_2_d_pad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="D-Pad"
+            android:textSize="24sp"
+            android:tag="1"
+            android:onClick="setPadControls"
+          />
+        </RadioGroup>
+
+        <ToggleButton
+          android:id="@+id/ready_2_toggle"
+          style="?metaButtonBarButtonStyle"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:text="ToggleButton"
+          android:textOff="Not Ready"
+          android:textOn="Ready!"
+          android:textSize="24sp"
+          android:tag="1"
+          android:onClick="togglePlayerReady"
+        />
+      </LinearLayout>
     </LinearLayout>
   </FrameLayout>
 </FrameLayout>
