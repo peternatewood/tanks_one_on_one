@@ -47,55 +47,55 @@ public class DPad {
     int centerX = isOnBottom ? 224 : w - 224;
     int centerY = y + h / 2;
     if (isOnBottom) {
-      arrowUp     = new Rect(centerX - 80, centerY - 80, centerX + 80, centerY);
-      arrowDown   = new Rect(centerX - 80, centerY + 16, centerX + 80, centerY + 80);
-      arrowLeft   = new Rect(centerX - 160, centerY - 80, centerX - 96, centerY + 80);
-      arrowRight  = new Rect(centerX + 96, centerY - 80, centerX + 160, centerY + 80);
+      arrowUp     = new Rect(centerX -  80, centerY - 112, centerX +  80, centerY);
+      arrowDown   = new Rect(centerX -  80, centerY +  16, centerX +  80, centerY + 112);
+      arrowLeft   = new Rect(centerX - 176, centerY - 112, centerX -  96, centerY + 112);
+      arrowRight  = new Rect(centerX +  96, centerY - 112, centerX + 176, centerY + 112);
 
-      arrowUpPoints[0] = centerX - 64; arrowUpPoints[1] = centerY - 24;
-      arrowUpPoints[2] = centerX;      arrowUpPoints[3] = centerY - 56;
-      arrowUpPoints[4] = centerX + 64; arrowUpPoints[5] = centerY - 24;
-      arrowUpPoints[6] = centerX;      arrowUpPoints[7] = centerY - 32;
+      arrowUpPoints[0]    = centerX -  64; arrowUpPoints[1]    = centerY - 40;
+      arrowUpPoints[2]    = centerX;       arrowUpPoints[3]    = centerY - 80;
+      arrowUpPoints[4]    = centerX +  64; arrowUpPoints[5]    = centerY - 40;
+      arrowUpPoints[6]    = centerX;       arrowUpPoints[7]    = centerY - 56;
 
-      arrowDownPoints[0] = centerX - 64; arrowDownPoints[1] = centerY + 32;
-      arrowDownPoints[2] = centerX;      arrowDownPoints[3] = centerY + 56;
-      arrowDownPoints[4] = centerX + 64; arrowDownPoints[5] = centerY + 32;
-      arrowDownPoints[6] = centerX;      arrowDownPoints[7] = centerY + 40;
+      arrowDownPoints[0]  = centerX -  64; arrowDownPoints[1]  = centerY + 48;
+      arrowDownPoints[2]  = centerX;       arrowDownPoints[3]  = centerY + 80;
+      arrowDownPoints[4]  = centerX +  64; arrowDownPoints[5]  = centerY + 48;
+      arrowDownPoints[6]  = centerX;       arrowDownPoints[7]  = centerY + 56;
 
-      arrowLeftPoints[0] = centerX - 112; arrowLeftPoints[1] = centerY - 56;
-      arrowLeftPoints[2] = centerX - 144; arrowLeftPoints[3] = centerY;
-      arrowLeftPoints[4] = centerX - 112; arrowLeftPoints[5] = centerY + 56;
-      arrowLeftPoints[6] = centerX - 128; arrowLeftPoints[7] = centerY;
+      arrowLeftPoints[0]  = centerX - 112; arrowLeftPoints[1]  = centerY - 72;
+      arrowLeftPoints[2]  = centerX - 160; arrowLeftPoints[3]  = centerY;
+      arrowLeftPoints[4]  = centerX - 112; arrowLeftPoints[5]  = centerY + 72;
+      arrowLeftPoints[6]  = centerX - 128; arrowLeftPoints[7]  = centerY;
 
-      arrowRightPoints[0] = centerX + 112; arrowRightPoints[1] = centerY - 56;
-      arrowRightPoints[2] = centerX + 144; arrowRightPoints[3] = centerY;
-      arrowRightPoints[4] = centerX + 112; arrowRightPoints[5] = centerY + 56;
+      arrowRightPoints[0] = centerX + 112; arrowRightPoints[1] = centerY - 72;
+      arrowRightPoints[2] = centerX + 160; arrowRightPoints[3] = centerY;
+      arrowRightPoints[4] = centerX + 112; arrowRightPoints[5] = centerY + 72;
       arrowRightPoints[6] = centerX + 128; arrowRightPoints[7] = centerY;
     }
     else {
-      arrowUp     = new Rect(centerX - 80, centerY, centerX + 80, centerY + 80);
-      arrowDown   = new Rect(centerX - 80, centerY - 80, centerX + 80, centerY - 16);
-      arrowLeft   = new Rect(centerX + 96, centerY - 80, centerX + 160, centerY + 80);
-      arrowRight  = new Rect(centerX - 160, centerY - 80, centerX - 96, centerY + 80);
+      arrowUp     = new Rect(centerX -  80, centerY,       centerX +  80, centerY + 112);
+      arrowDown   = new Rect(centerX -  80, centerY - 112, centerX +  80, centerY -  16);
+      arrowLeft   = new Rect(centerX +  96, centerY - 112, centerX + 176, centerY + 112);
+      arrowRight  = new Rect(centerX - 176, centerY - 112, centerX -  96, centerY + 112);
 
-      arrowUpPoints[0] = centerX - 64; arrowUpPoints[1] = centerY + 24;
-      arrowUpPoints[2] = centerX;      arrowUpPoints[3] = centerY + 56;
-      arrowUpPoints[4] = centerX + 64; arrowUpPoints[5] = centerY + 24;
-      arrowUpPoints[6] = centerX;      arrowUpPoints[7] = centerY + 32;
+      arrowUpPoints[0]    = centerX -  64; arrowUpPoints[1]    = centerY + 40;
+      arrowUpPoints[2]    = centerX;       arrowUpPoints[3]    = centerY + 80;
+      arrowUpPoints[4]    = centerX +  64; arrowUpPoints[5]    = centerY + 40;
+      arrowUpPoints[6]    = centerX;       arrowUpPoints[7]    = centerY + 56;
 
-      arrowDownPoints[0] = centerX - 64; arrowDownPoints[1] = centerY - 32;
-      arrowDownPoints[2] = centerX;      arrowDownPoints[3] = centerY - 56;
-      arrowDownPoints[4] = centerX + 64; arrowDownPoints[5] = centerY - 32;
-      arrowDownPoints[6] = centerX;      arrowDownPoints[7] = centerY - 40;
+      arrowDownPoints[0]  = centerX -  64; arrowDownPoints[1]  = centerY - 48;
+      arrowDownPoints[2]  = centerX;       arrowDownPoints[3]  = centerY - 80;
+      arrowDownPoints[4]  = centerX +  64; arrowDownPoints[5]  = centerY - 48;
+      arrowDownPoints[6]  = centerX;       arrowDownPoints[7]  = centerY - 56;
 
-      arrowLeftPoints[0] = centerX + 112; arrowLeftPoints[1] = centerY - 56;
-      arrowLeftPoints[2] = centerX + 144; arrowLeftPoints[3] = centerY;
-      arrowLeftPoints[4] = centerX + 112; arrowLeftPoints[5] = centerY + 56;
-      arrowLeftPoints[6] = centerX + 128; arrowLeftPoints[7] = centerY;
+      arrowLeftPoints[0]  = centerX + 112; arrowLeftPoints[1]  = centerY - 72;
+      arrowLeftPoints[2]  = centerX + 160; arrowLeftPoints[3]  = centerY;
+      arrowLeftPoints[4]  = centerX + 112; arrowLeftPoints[5]  = centerY + 72;
+      arrowLeftPoints[6]  = centerX + 128; arrowLeftPoints[7]  = centerY;
 
-      arrowRightPoints[0] = centerX - 112; arrowRightPoints[1] = centerY - 56;
-      arrowRightPoints[2] = centerX - 144; arrowRightPoints[3] = centerY;
-      arrowRightPoints[4] = centerX - 112; arrowRightPoints[5] = centerY + 56;
+      arrowRightPoints[0] = centerX - 112; arrowRightPoints[1] = centerY - 72;
+      arrowRightPoints[2] = centerX - 160; arrowRightPoints[3] = centerY;
+      arrowRightPoints[4] = centerX - 112; arrowRightPoints[5] = centerY + 72;
       arrowRightPoints[6] = centerX - 128; arrowRightPoints[7] = centerY;
     }
   }
