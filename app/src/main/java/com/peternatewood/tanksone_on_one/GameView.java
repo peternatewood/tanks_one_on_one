@@ -371,23 +371,18 @@ public class GameView extends SurfaceView implements Runnable {
     int index = event.getActionIndex();
     float x = event.getX(index);
     float y = event.getY(index);
-    boolean buttonState[] = { joy1._button(), joy2._button() };
 
     switch (event.getAction() & MotionEvent.ACTION_MASK) {
-      case MotionEvent.ACTION_DOWN:
-        // First touch event
+      case MotionEvent.ACTION_DOWN: // First touch event
+      case MotionEvent.ACTION_POINTER_DOWN: // Subsequent touch events
         switch (controls[0]) {
           case "joy":
             joy1.handleActionDown(x, y, index);
-            if (joy1._button() != buttonState[0]) {
-              tank1.toggleFire(joy1._button());
-            }
+            if (joy1._button()) { tank1.toggleFire(true); }
             break;
           case "pad":
             pad1.handleActionDown(x, y, index);
-            if (pad1._button() != buttonState[0]) {
-              tank1.toggleFire(pad1._button());
-            }
+            if (pad1._button()) { tank1.toggleFire(true); }
             tank1.setAcc(pad1._xAcc(), pad1._yAcc());
             break;
         }
@@ -395,48 +390,11 @@ public class GameView extends SurfaceView implements Runnable {
         switch (controls[1]) {
           case "joy":
             joy2.handleActionDown(x, y, index);
-            if (joy2._button() != buttonState[1]) {
-              tank2.toggleFire(joy2._button());
-            }
+            if (joy2._button()) { tank2.toggleFire(true); }
             break;
           case "pad":
             pad2.handleActionDown(x, y, index);
-            if (pad2._button() != buttonState[1]) {
-              tank2.toggleFire(pad2._button());
-            }
-            tank2.setAcc(pad2._xAcc(), pad2._yAcc());
-            break;
-          }
-        break;
-      case MotionEvent.ACTION_POINTER_DOWN:
-        // Subsequent touch events
-        switch (controls[0]) {
-          case "joy":
-            joy1.handleActionDown(x, y, index);
-            if (joy1._button() != buttonState[0]) {
-              tank1.toggleFire(joy1._button());
-            }
-            break;
-          case "pad":
-            pad1.handleActionDown(x, y, index);
-            if (pad1._button() != buttonState[0]) {
-              tank1.toggleFire(pad1._button());
-            }
-            tank1.setAcc(pad1._xAcc(), pad1._yAcc());
-            break;
-        }
-        switch (controls[1]) {
-          case "joy":
-            joy2.handleActionDown(x, y, index);
-            if (joy2._button() != buttonState[1]) {
-              tank2.toggleFire(joy2._button());
-            }
-            break;
-          case "pad":
-            pad2.handleActionDown(x, y, index);
-            if (pad2._button() != buttonState[1]) {
-              tank2.toggleFire(pad2._button());
-            }
+            if (pad2._button()) { tank2.toggleFire(true); }
             tank2.setAcc(pad2._xAcc(), pad2._yAcc());
             break;
         }
@@ -467,22 +425,18 @@ public class GameView extends SurfaceView implements Runnable {
             break;
         }
         break;
-      case MotionEvent.ACTION_POINTER_UP:
-        // Every touch release except the last one
+      case MotionEvent.ACTION_POINTER_UP: // Every touch release except the last one
+      case MotionEvent.ACTION_UP: // Last touch to be released
         switch (controls[0]) {
           case "joy":
             joy1.handleActionUp(x, y, index);
             tank1.setAcc(joy1._xAcc(), joy1._yAcc());
-            if (joy1._button() != buttonState[0]) {
-              tank1.toggleFire(joy1._button());
-            }
+            if (!joy1._button()) { tank1.toggleFire(false); }
             break;
           case "pad":
             pad1.handleActionUp(x, y, index);
             tank1.setAcc(pad1._xAcc(), pad1._yAcc());
-            if (pad1._button() != buttonState[0]) {
-              tank1.toggleFire(pad1._button());
-            }
+            if (!pad1._button()) { tank1.toggleFire(false); }
             break;
         }
 
@@ -490,52 +444,12 @@ public class GameView extends SurfaceView implements Runnable {
           case "joy":
             joy2.handleActionUp(x, y, index);
             tank2.setAcc(joy2._xAcc(), joy2._yAcc());
-            if (joy2._button() != buttonState[1]) {
-              tank2.toggleFire(joy2._button());
-            }
+            if (!joy2._button()) { tank2.toggleFire(false); }
             break;
           case "pad":
             pad2.handleActionUp(x, y, index);
             tank2.setAcc(pad2._xAcc(), pad2._yAcc());
-            if (pad2._button() != buttonState[1]) {
-              tank2.toggleFire(pad2._button());
-            }
-            break;
-        }
-        break;
-      case MotionEvent.ACTION_UP:
-        // Last touch to be released
-        switch (controls[0]) {
-          case "joy":
-            joy1.handleActionUp(x, y, index);
-            tank1.setAcc(joy1._xAcc(), joy1._yAcc());
-            if (joy1._button() != buttonState[0]) {
-              tank1.toggleFire(joy1._button());
-            }
-            break;
-          case "pad":
-            pad1.handleActionUp(x, y, index);
-            tank1.setAcc(pad1._xAcc(), pad1._yAcc());
-            if (pad1._button() != buttonState[0]) {
-              tank1.toggleFire(pad1._button());
-            }
-            break;
-        }
-
-        switch (controls[1]) {
-          case "joy":
-            joy2.handleActionUp(x, y, index);
-            tank2.setAcc(joy1._xAcc(), joy1._yAcc());
-            if (joy2._button() != buttonState[1]) {
-              tank2.toggleFire(joy2._button());
-            }
-            break;
-          case "pad":
-            pad2.handleActionUp(x, y, index);
-            tank2.setAcc(pad2._xAcc(), pad2._yAcc());
-            if (pad2._button() != buttonState[1]) {
-              tank2.toggleFire(pad2._button());
-            }
+            if (!pad2._button()) { tank2.toggleFire(false); }
             break;
         }
         break;
