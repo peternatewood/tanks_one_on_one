@@ -13,7 +13,6 @@
   <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="48sp"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
   >
@@ -22,23 +21,29 @@
       android:layout_height="match_parent"
       android:orientation="vertical"
     >
-      <TextView
+      <ToggleButton
+        android:id="@+id/ready_1_toggle"
+        style="?metaButtonBarButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:gravity="center"
-        android:text="Player 1 Controls"
-        android:textSize="32sp"
-        android:textStyle="bold"
+        android:text="ToggleButton"
+        android:textOff="Not Ready"
+        android:textOn="Ready!"
+        android:textSize="24sp"
+        android:tag="0"
+        android:onClick="togglePlayerReady"
+        android:rotation="180"
       />
 
       <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:gravity="center"
         android:orientation="horizontal"
         android:checkedButton="@+id/radio_1_joy"
+        android:rotation="180"
       >
         <RadioButton
           android:id="@+id/radio_1_joy"
@@ -65,7 +70,18 @@
       <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:text="Player 1 Controls"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:rotation="180"
+      />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:gravity="center"
         android:text="Player 2 Controls"
         android:textSize="32sp"
@@ -75,7 +91,7 @@
       <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:gravity="center"
         android:orientation="horizontal"
         android:checkedButton="@+id/radio_2_joy"
@@ -101,30 +117,20 @@
           android:onClick="setPadControls"
         />
       </RadioGroup>
+
+      <ToggleButton
+        android:id="@+id/ready_2_toggle"
+        style="?metaButtonBarButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="ToggleButton"
+        android:textOff="Not Ready"
+        android:textOn="Ready!"
+        android:textSize="24sp"
+        android:tag="1"
+        android:onClick="togglePlayerReady"
+      />
     </LinearLayout>
   </FrameLayout>
-
-  <LinearLayout
-    android:id="@+id/menu_content_controls"
-    style="?metaButtonBarStyle"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom|center_horizontal"
-    android:background="@color/black_overlay"
-    android:orientation="horizontal"
-    tools:ignore="UselessParent"
-  >
-
-    <Button
-      android:id="@+id/battle_button"
-      style="?metaButtonBarButtonStyle"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      android:onClick="startBattle"
-      android:text="@string/battle_button"
-      android:textSize="24sp"
-    />
-
-  </LinearLayout>
 </FrameLayout>

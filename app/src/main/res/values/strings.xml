@@ -4,6 +4,4 @@
     <string name="title_text">Tanks</string>
     <string name="subtitle_text">One-on-One</string>
     <string name="start_button">Start</string>
-
-    <string name="battle_button">Battle!</string>
 </resources>
